@@ -1,0 +1,7 @@
+[
+  {
+    "dataStorage": ["GB", "Gb", "MB", "Mb", "KB", "Kb"],
+    "battery": ["Ah", "mAh"],
+    "resolution": ["px", "Mp"]
+  }
+]

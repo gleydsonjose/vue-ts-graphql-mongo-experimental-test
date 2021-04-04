@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./",
+    "lib": ["ES6"],
+    "strict": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@database/*": ["./src/database/*"],
+      "@graphql": ["./src/graphql/index"],
+      "@ts_types/*": ["src/ts_types/*"]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "tests/**/*.ts",
+  ],
+  "exclude": ["node_modules"]
+}

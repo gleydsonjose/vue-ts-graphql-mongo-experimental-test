@@ -1,0 +1,101 @@
+[
+  {
+    "manufacturer": "Samsung",
+    "model": "Galaxy M31",
+    "year": 2020,
+    "operationSystem": "Android 11 Samsung One Ui Core 3.0",
+    "chipset": "Samsung Exynos 9611",
+    "randomAcessMemory": {
+      "quantity": 6,
+      "unit": "GB"
+    },
+    "internalMemory": {
+      "quantity": 128,
+      "unit": "GB"
+    },
+    "screen": {
+      "type": "Super AMOLED",
+      "resolution": {
+        "width": 1080,
+        "height": 2340,
+        "unit": "px"
+      },
+      "protection": "Gorilla Glass 3"
+    },
+    "camera": {
+      "unit": "Mp",
+      "back": [64, 8, 5, 5],
+      "front": [32]
+    },
+    "battery": {
+      "quantity": 6000,
+      "unit": "mAh"
+    }
+  },
+  {
+    "manufacturer": "Samsung",
+    "model": "Galaxy A51",
+    "year": 2019,
+    "operationSystem": "Android 10 Samsung One Ui Core 2.0",
+    "chipset": "Samsung Exynos 9611",
+    "randomAcessMemory": {
+      "quantity": 4,
+      "unit": "GB"
+    },
+    "internalMemory": {
+      "quantity": 128,
+      "unit": "GB"
+    },
+    "screen": {
+      "type": "Super AMOLED",
+      "resolution": {
+        "width": 1080,
+        "height": 2400,
+        "unit": "px"
+      },
+      "protection": "Gorilla Glass 3"
+    },
+    "camera": {
+      "unit": "Mp",
+      "back": [48, 5, 12, 5],
+      "front": [32]
+    },
+    "battery": {
+      "quantity": 4000,
+      "unit": "mAh"
+    }
+  },
+  {
+    "manufacturer": "Samsung",
+    "model": "Galaxy M51",
+    "year": 2020,
+    "operationSystem": "Android 11 Samsung One Ui Core 3.0",
+    "chipset": "Snapdragon 730G Qualcomm SDM730",
+    "randomAcessMemory": {
+      "quantity": 6,
+      "unit": "GB"
+    },
+    "internalMemory": {
+      "quantity": 128,
+      "unit": "GB"
+    },
+    "screen": {
+      "type": "Super AMOLED",
+      "resolution": {
+        "width": 1080,
+        "height": 2400,
+        "unit": "px"
+      },
+      "protection": "Gorilla Glass 3"
+    },
+    "camera": {
+      "unit": "Mp",
+      "back": [64, 12, 5, 5],
+      "front": [32]
+    },
+    "battery": {
+      "quantity": 7000,
+      "unit": "mAh"
+    }
+  }
+]
