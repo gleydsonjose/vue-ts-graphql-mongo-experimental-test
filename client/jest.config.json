@@ -1,0 +1,12 @@
+{
+  "moduleFileExtensions": [
+    "ts",
+    "vue",
+    "js",
+    "json"
+  ],
+  "transform": {
+    ".*\\.(vue)$": "vue-jest",
+    "^.+\\.tsx?$": "ts-jest"
+  }
+}
