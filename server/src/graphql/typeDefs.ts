@@ -1,40 +1,21 @@
 const { gql } = require('apollo-server')
 
 export default gql`
-  enum DataStorageUnits {
-    GB
-    Gb
-    MB
-    Mb
-    KB
-    Kb
-  }
-
-  enum BatteryUnits {
-    Ah
-    mAh
-  }
-
-  enum ResolutionUnits {
-    px
-    Mp
-  }
-
   type Units {
-    dataStorage: [DataStorageUnits]
-    battery: [BatteryUnits]
-    resolution: [ResolutionUnits]
+    dataStorage: [String]
+    battery: [String]
+    resolution: [String]
   }
 
   type DataStorage {
     quantity: Int
-    unit: DataStorageUnits
+    unit: String
   }
 
   type Resolution {
     width: Int
     height: Int
-    unit: ResolutionUnits
+    unit: String
   }
 
   type Screen {
@@ -43,15 +24,24 @@ export default gql`
     protection: String
   }
 
+  type PositionCamera {
+    id: Int
+    pixel: Int
+  }
+
+  type PositionsCamera {
+    back: [PositionCamera]
+    front: [PositionCamera]
+  }
+
   type Camera {
     unit: String
-    back: [Int]
-    front: [Int]
+    positions: PositionsCamera
   }
 
   type Battery {
     quantity: Int
-    unit: BatteryUnits
+    unit: String
   }
 
   type Phone {
@@ -61,7 +51,7 @@ export default gql`
     year: Int
     operationSystem: String
     chipset: String
-    randomAcessMemory: DataStorage
+    randomAccessMemory: DataStorage
     internalMemory: DataStorage
     screen: Screen
     camera: Camera
@@ -70,13 +60,13 @@ export default gql`
 
   input DataStorageInput {
     quantity: Int
-    unit: DataStorageUnits
+    unit: String
   }
 
   input ResolutionInput {
     width: Int
     height: Int
-    unit: ResolutionUnits
+    unit: String
   }
 
   input ScreenInput {
@@ -85,15 +75,24 @@ export default gql`
     protection: String
   }
 
+  input PositionCameraInput {
+    id: Int
+    pixel: Int
+  }
+
+  input PositionsCameraInput {
+    back: [PositionCameraInput]
+    front: [PositionCameraInput]
+  }
+
   input CameraInput {
     unit: String
-    back: [Int]
-    front: [Int]
+    positions: PositionsCameraInput
   }
 
   input BatteryInput {
     quantity: Int
-    unit: BatteryUnits
+    unit: String
   }
 
   input PhoneInput {
@@ -103,7 +102,7 @@ export default gql`
     year: Int
     operationSystem: String
     chipset: String
-    randomAcessMemory: DataStorageInput
+    randomAccessMemory: DataStorageInput
     internalMemory: DataStorageInput
     screen: ScreenInput
     camera: CameraInput

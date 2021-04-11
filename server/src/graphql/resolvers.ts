@@ -1,5 +1,5 @@
 import Services from '@database/Services'
-import { QueryPhone, MutationPhone } from '@ts_types/Phone'
+import { QueryPhoneInterface, MutationPhoneInterface } from '@interfaces/Phone'
 import { ObjectId } from 'mongodb'
 
 const phonesServices = new Services('phones')
@@ -12,7 +12,7 @@ export default {
       return phonesData
     },
 
-    phone: async (_: any, args: QueryPhone) => {
+    phone: async (_: any, args: QueryPhoneInterface) => {
       const _id = new ObjectId(args._id)
       const [phoneData] = await phonesServices.fetchData({ _id })
       return phoneData
@@ -28,12 +28,12 @@ export default {
   },
 
   Mutation: {
-    addPhone: async (_: any, args: MutationPhone) => {
+    addPhone: async (_: any, args: MutationPhoneInterface) => {
       const { ops: [phoneAdded] } = await phonesServices.insertData(args.phone)
       return phoneAdded
     },
 
-    editPhone: async (_: any, args: MutationPhone) => {
+    editPhone: async (_: any, args: MutationPhoneInterface) => {
       const _id = new ObjectId(args._id)
       const phone = args.phone
       const { matchedCount } = await phonesServices.editData({ _id }, { $set: phone })
@@ -46,7 +46,7 @@ export default {
       }
     },
 
-    deletePhone: async (_: any, args: MutationPhone) => {
+    deletePhone: async (_: any, args: MutationPhoneInterface) => {
       const _id = new ObjectId(args._id)
       const { deletedCount } = await phonesServices.deleteData({ _id })
 

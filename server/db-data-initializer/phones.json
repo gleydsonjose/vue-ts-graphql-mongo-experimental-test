@@ -24,8 +24,32 @@
     },
     "camera": {
       "unit": "Mp",
-      "back": [64, 8, 5, 5],
-      "front": [32]
+      "positions": {
+        "back": [
+          {
+            "id": 1,
+            "pixel": 64
+          },
+          {
+            "id": 2,
+            "pixel": 8
+          },
+          {
+            "id": 3,
+            "pixel": 5
+          },
+          {
+            "id": 4,
+            "pixel": 5
+          }
+        ],
+        "front": [
+          {
+            "id": 1,
+            "pixel": 32
+          }
+        ]
+      }
     },
     "battery": {
       "quantity": 6000,
@@ -57,8 +81,32 @@
     },
     "camera": {
       "unit": "Mp",
-      "back": [48, 5, 12, 5],
-      "front": [32]
+      "positions": {
+        "back": [
+          {
+            "id": 1,
+            "pixel": 48
+          },
+          {
+            "id": 2,
+            "pixel": 5
+          },
+          {
+            "id": 3,
+            "pixel": 12
+          },
+          {
+            "id": 4,
+            "pixel": 5
+          }
+        ],
+        "front": [
+          {
+            "id": 1,
+            "pixel": 32
+          }
+        ]
+      }
     },
     "battery": {
       "quantity": 4000,
@@ -71,7 +119,7 @@
     "year": 2020,
     "operationSystem": "Android 11 Samsung One Ui Core 3.0",
     "chipset": "Snapdragon 730G Qualcomm SDM730",
-    "randomAcessMemory": {
+    "randomAccessMemory": {
       "quantity": 6,
       "unit": "GB"
     },
@@ -90,8 +138,32 @@
     },
     "camera": {
       "unit": "Mp",
-      "back": [64, 12, 5, 5],
-      "front": [32]
+      "positions": {
+        "back": [
+          {
+            "id": 1,
+            "pixel": 64
+          },
+          {
+            "id": 2,
+            "pixel": 12
+          },
+          {
+            "id": 3,
+            "pixel": 5
+          },
+          {
+            "id": 4,
+            "pixel": 5
+          }
+        ],
+        "front": [
+          {
+            "id": 1,
+            "pixel": 32
+          }
+        ]
+      }
     },
     "battery": {
       "quantity": 7000,
