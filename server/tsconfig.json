@@ -11,7 +11,7 @@
     "paths": {
       "@database/*": ["./src/database/*"],
       "@graphql": ["./src/graphql/index"],
-      "@ts_types/*": ["src/ts_types/*"]
+      "@interfaces/*": ["src/interfaces/*"]
     }
   },
   "include": [
