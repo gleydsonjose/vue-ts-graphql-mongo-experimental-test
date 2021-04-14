@@ -1,9 +1,10 @@
+/* eslint @typescript-eslint/no-var-requires: "off" */
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 const ESLintPlugin = require('eslint-webpack-plugin')
-const path = require('path')
 const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin')
+const DotEnv = require('dotenv-webpack')
 
 const ENVIRONMENT = process.env.NODE_ENV
 
@@ -26,7 +27,8 @@ module.exports = {
     new VueLoaderPlugin(),
     new ESLintPlugin({
       extensions: ['js', 'ts', 'vue']
-    })
+    }),
+    new DotEnv()
   ],
   module: {
     rules: [
