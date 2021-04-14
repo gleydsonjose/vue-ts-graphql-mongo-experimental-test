@@ -1,6 +1,8 @@
 <template>
   <section class="register-page">
-    <h1 class="register-page__title">
+    <h1
+      class="register-page__title"
+    >
       Register a phone
     </h1>
     <FormPhone />

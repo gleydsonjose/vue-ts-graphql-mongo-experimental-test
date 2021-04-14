@@ -1,21 +1,19 @@
 <template>
-  <!-- Before: FormPhone 674 pages -->
-
   <form class="form-phone">
     <InputSection
-      v-model="$store.state.form.manufacturer"
+      v-model="$store.state.registerPage.form.manufacturer"
       id-attribute="phone-manufacturer"
       label-text="Manufacturer"
     />
 
     <InputSection
-      v-model="$store.state.form.model"
+      v-model="$store.state.registerPage.form.model"
       id-attribute="phone-model"
       label-text="Model"
     />
 
     <InputSection
-      v-model.number="$store.state.form.year"
+      v-model.number="$store.state.registerPage.form.year"
       id-attribute="phone-year"
       input-type="number"
       label-text="Year"
@@ -23,13 +21,13 @@
     />
 
     <InputSection
-      v-model="$store.state.form.operationSystem"
+      v-model="$store.state.registerPage.form.operationSystem"
       id-attribute="phone-operation-system"
       label-text="Operation System"
     />
 
     <InputSection
-      v-model="$store.state.form.chipset"
+      v-model="$store.state.registerPage.form.chipset"
       id-attribute="phone-chipset"
       label-text="Chipset"
     />
@@ -40,7 +38,7 @@
       </h2>
       <section class="form-phone__input-group-section">
         <InputSection
-          v-model.number="$store.state.form.randomAccessMemory.quantity"
+          v-model.number="$store.state.registerPage.form.randomAccessMemory.quantity"
           id-attribute="phone-random-access-memory"
           input-type="number"
           label-text="Quantity"
@@ -49,12 +47,12 @@
         />
 
         <InputSection
-          v-model="$store.state.form.randomAccessMemory.unit"
+          v-model="$store.state.registerPage.form.randomAccessMemory.unit"
           id-attribute="phone-random-access-memory-unit"
           input-type="select"
           label-text="Unit"
           select-default-label-option="Choose a unit"
-          :select-options="$store.state.units.dataStorage"
+          :select-options="$store.state.registerPage.units.dataStorage"
           :input-quantity="2"
         />
       </section>
@@ -65,7 +63,7 @@
       </h2>
       <section class="form-phone__input-group-section">
         <InputSection
-          v-model.number="$store.state.form.internalMemory.quantity"
+          v-model.number="$store.state.registerPage.form.internalMemory.quantity"
           id-attribute="phone-internal-memory"
           input-type="number"
           label-text="Quantity"
@@ -74,12 +72,12 @@
         />
 
         <InputSection
-          v-model="$store.state.form.internalMemory.unit"
+          v-model="$store.state.registerPage.form.internalMemory.unit"
           id-attribute="phone-internal-memory"
           input-type="select"
           label-text="Unit"
           select-default-label-option="Choose a unit"
-          :select-options="$store.state.units.dataStorage"
+          :select-options="$store.state.registerPage.units.dataStorage"
           :input-quantity="2"
         />
       </section>
@@ -90,14 +88,14 @@
       </h2>
       <section class="form-phone__input-group-section">
         <InputSection
-          v-model="$store.state.form.screen.type"
+          v-model="$store.state.registerPage.form.screen.type"
           id-attribute="phone-screen-type"
           label-text="Type"
           :input-quantity="2"
         />
 
         <InputSection
-          v-model="$store.state.form.screen.protection"
+          v-model="$store.state.registerPage.form.screen.protection"
           id-attribute="phone-protection"
           label-text="Protection"
           :input-quantity="2"
@@ -105,7 +103,7 @@
       </section>
       <section class="form-phone__input-group-section">
         <InputSection
-          v-model.number="$store.state.form.screen.resolution.width"
+          v-model.number="$store.state.registerPage.form.screen.resolution.width"
           id-attribute="phone-screen-resolution-width"
           input-type="number"
           label-text="Width"
@@ -114,7 +112,7 @@
         />
 
         <InputSection
-          v-model.number="$store.state.form.screen.resolution.height"
+          v-model.number="$store.state.registerPage.form.screen.resolution.height"
           id-attribute="phone-screen-resolution-height"
           input-type="number"
           label-text="Height"
@@ -123,12 +121,12 @@
         />
 
         <InputSection
-          v-model="$store.state.form.screen.resolution.unit"
+          v-model="$store.state.registerPage.form.screen.resolution.unit"
           id-attribute="phone-screen-resolution-unit"
           input-type="select"
           label-text="Unit"
           select-default-label-option="Choose a unit"
-          :select-options="$store.state.units.resolution"
+          :select-options="$store.state.registerPage.units.resolution"
           :input-quantity="3"
         />
       </section>
@@ -139,48 +137,48 @@
       </h2>
 
       <InputSection
-        v-for="(backCamera, indexBackCamera) in $store.state.form.camera.positions.back"
+        v-for="(backCamera, indexBackCamera) in $store.state.registerPage.form.camera.positions.back"
         :key="backCamera.id"
         v-model.number="backCamera.pixel"
         :id-attribute="`phone-back-camera-${backCamera.id}`"
         input-type="number"
         :label-text="`${indexBackCamera + 1}° Back Camera Pixel Quantity`"
         input-section-type="btn-aside"
-        @remove-camera="$store.commit('removeCamera', {cameraPosition: 'back', indexCamera: indexBackCamera})"
+        @remove-camera="$store.commit('registerPage/removeCamera', {cameraPosition: 'back', indexCamera: indexBackCamera})"
       />
 
       <ButtonSection
         button-section-type="add"
         label-text="Add Back Camera"
         icon-class="fas fa-plus"
-        @click-button-section="$store.commit('addCamera', {cameraPosition: 'back'})"
+        @click-button-section="$store.commit('registerPage/addCamera', {cameraPosition: 'back'})"
       />
 
       <InputSection
-        v-for="(frontCamera, indexFrontCamera) in $store.state.form.camera.positions.front"
+        v-for="(frontCamera, indexFrontCamera) in $store.state.registerPage.form.camera.positions.front"
         :key="frontCamera.id"
         v-model.number="frontCamera.pixel"
         :id-attribute="`phone-front-camera-${frontCamera.id}`"
         input-type="number"
         :label-text="`${indexFrontCamera + 1}° Front Camera Pixel Quantity`"
         input-section-type="btn-aside"
-        @remove-camera="$store.commit('removeCamera', {cameraPosition: 'front', indexCamera: indexFrontCamera})"
+        @remove-camera="$store.commit('registerPage/removeCamera', {cameraPosition: 'front', indexCamera: indexFrontCamera})"
       />
 
       <ButtonSection
         button-section-type="add"
         label-text="Add Front Camera"
         icon-class="fas fa-plus"
-        @click-button-section="$store.commit('addCamera', {cameraPosition: 'front'})"
+        @click-button-section="$store.commit('registerPage/addCamera', {cameraPosition: 'front'})"
       />
 
       <InputSection
-        v-model="$store.state.form.camera.unit"
+        v-model="$store.state.registerPage.form.camera.unit"
         id-attribute="phone-camera-unit"
         input-type="select"
         label-text="Unit"
         select-default-label-option="Choose a unit"
-        :select-options="$store.state.units.resolution"
+        :select-options="$store.state.registerPage.units.resolution"
       />
     </section>
     <section class="form-phone__input-parent-section">
@@ -189,7 +187,7 @@
       </h2>
       <section class="form-phone__input-group-section">
         <InputSection
-          v-model.number="$store.state.form.battery.quantity"
+          v-model.number="$store.state.registerPage.form.battery.quantity"
           id-attribute="phone-battery-quantity"
           input-type="number"
           label-text="Quantity"
@@ -197,12 +195,12 @@
         />
 
         <InputSection
-          v-model="$store.state.form.battery.unit"
+          v-model="$store.state.registerPage.form.battery.unit"
           id-attribute="phone-battery-unit"
           input-type="select"
           label-text="Unit"
           select-default-label-option="Choose a unit"
-          :select-options="$store.state.units.battery"
+          :select-options="$store.state.registerPage.units.battery"
           :input-quantity="2"
         />
       </section>
@@ -212,7 +210,7 @@
       button-section-type="save"
       label-text="Save"
       icon-class="fas fa-save"
-      @click-button-section="$store.dispatch('saveData')"
+      @click-button-section="$store.dispatch('registerPage/saveData')"
     />
   </form>
 </template>
@@ -232,7 +230,7 @@ export default defineComponent({
   },
 
   mounted() {
-    this.$store.dispatch('getAllUnits')
+    this.$store.dispatch('registerPage/getAllUnits')
   },
 })
 </script>
