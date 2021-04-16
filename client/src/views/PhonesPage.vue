@@ -94,7 +94,7 @@
       </thead>
       <tbody class="phone-page__tbody">
         <tr
-          v-for="(phone, indexPhone) in phones"
+          v-for="(phone, indexPhone) in $store.state.phonesPage.phones"
           :key="phone._id"
           class="phone-page__tr"
         >
@@ -123,16 +123,16 @@
             {{ phone.screen.protection }}
           </td>
           <td class="phone-page__td">
-            {{ phone.randomAcessMemory.quantity + phone.randomAcessMemory.unit }}
+            {{ phone.randomAccessMemory.quantity + phone.randomAccessMemory.unit }}
           </td>
           <td class="phone-page__td">
             {{ phone.internalMemory.quantity + phone.internalMemory.unit }}
           </td>
           <td class="phone-page__td">
-            {{ buildStringWithCameras(phone.camera.back, phone.camera.unit) }}
+            {{ buildStringWithCameras(phone.camera.positions.back, phone.camera.unit) }}
           </td>
           <td class="phone-page__td">
-            {{ buildStringWithCameras(phone.camera.front, phone.camera.unit) }}
+            {{ buildStringWithCameras(phone.camera.positions.front, phone.camera.unit) }}
           </td>
           <td class="phone-page__td">
             {{ phone.battery.quantity + phone.battery.unit }}
@@ -149,7 +149,7 @@
               <button
                 class="phone-page__btn phone-page__btn--remove"
                 title="Remove"
-                @click="removeOnePhone(indexPhone)"
+                @click="$store.dispatch('phonesPage/removeOnePhone', { _id: phone._id, indexPhone })"
               >
                 <i class="fas fa-trash-alt phone-page__btn-icon" />
               </button>
@@ -163,89 +163,22 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { PhoneInterface } from '@interfaces/Phone'
+import { PhoneInterface, PositionCameraInterface } from '@interfaces/Phone'
 
 export default defineComponent({
   name: 'PhonesPage',
 
-  data() {
-    return {
-      phones: []
-    }
-  },
-
   mounted() {
-    this.getAllPhones()
+    this.$store.dispatch('phonesPage/getAllPhones')
   },
 
   methods: {
-    async getAllPhones() {
-      try {
-        const response = await fetch('http://localhost:4000', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            query: `
-              query fetchAllPhones {
-                phones {
-                  _id
-                  manufacturer
-                  model
-                  year
-                  operationSystem
-                  chipset
-                  randomAcessMemory {
-                    quantity
-                    unit
-                  }
-                  internalMemory {
-                    quantity
-                    unit
-                  }
-                  screen {
-                    type
-                    resolution {
-                      width
-                      height
-                      unit
-                    }
-                    protection
-                  }
-                  camera {
-                    unit
-                    back
-                    front
-                  }
-                  battery {
-                    quantity
-                    unit
-                  }
-                }
-              }
-            `
-          })
-        })
-        const {data} = await response.json()
-        
-        this.phones = data.phones
-      } catch (error) {
-        console.error(error)
-      }
-    },
-
     editOnePhone(phone: PhoneInterface) {
       console.log({phone})
     },
 
-    removeOnePhone(indexPhone: number) {
-      this.phones.splice(indexPhone, 1)
-    },
-
-    buildStringWithCameras(cameras: number[], cameraUnit: string) {
-      return cameras.map((camera) => `${camera + cameraUnit}`).join(', ')
+    buildStringWithCameras(cameras: PositionCameraInterface[], cameraUnit: string) {
+      return cameras.map(({pixel}) => `${pixel + cameraUnit}`).join(', ')
     }
   }
 })

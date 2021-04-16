@@ -72,7 +72,7 @@ const mutations: MutationTree<FormPhoneInterface> = {
 }
 
 const actions: ActionTree<FormPhoneInterface, FormPhoneInterface> = {
-  async getAllUnits(context) {
+  async getAllUnits({ commit }) {
     try {
       const response = await fetch(SERVER_HOST, {
         method: 'POST',
@@ -93,13 +93,13 @@ const actions: ActionTree<FormPhoneInterface, FormPhoneInterface> = {
         })
       })
       const { data: { units } } = await response.json()
-      context.commit('getAllUnits', { units })
+      commit('getAllUnits', { units })
     } catch (error) {
       console.error(error)
     }
   },
 
-  async saveData(context) {
+  async saveData({ state }) {
     try {
       const response = await fetch(SERVER_HOST, {
         method: 'POST',
@@ -155,7 +155,7 @@ const actions: ActionTree<FormPhoneInterface, FormPhoneInterface> = {
             }
           `,
           variables: {
-            phone: context.state.form
+            phone: state.form
           }
         })
       })
