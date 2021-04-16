@@ -1,20 +1,26 @@
-import PhonesPage from '@views/PhonesPage.vue'
-import RegisterPage from '@views/RegisterPage.vue'
+import PhonesList from '@views/PhonesList.vue'
+import RegisterPhone from '@views/RegisterPhone.vue'
+import EditPhone from '@views/EditPhone.vue'
 
 export default [
   {
     path: '/:catchAll(.*)',
     name: 'NotFound',
-    redirect: '/phones'
+    redirect: '/phones-list'
   },
   {
-    path: '/phones',
-    name: 'PhonesPage',
-    component: PhonesPage
+    path: '/phones-list',
+    name: 'PhonesList',
+    component: PhonesList
   },
   {
-    path: '/register',
-    name: 'RegisterPage',
-    component: RegisterPage
-  }
+    path: '/register-phone',
+    name: 'RegisterPhone',
+    component: RegisterPhone
+  },
+  {
+    path: '/edit-phone/:_id',
+    name: 'EditPhone',
+    component: EditPhone
+  },
 ]

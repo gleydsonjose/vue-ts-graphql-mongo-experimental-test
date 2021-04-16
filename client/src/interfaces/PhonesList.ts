@@ -1,5 +1,5 @@
 import { PhoneInterface } from '@interfaces/Phone'
 
-export interface PhonesPageInterface {
+export interface PhonesListInterface {
   phones: PhoneInterface[]
 }

@@ -1,10 +1,12 @@
 import { createStore, createLogger } from 'vuex'
-import registerPage from '@store/modules/registerPage'
-import phonesPage from '@store/modules/phonesPage'
+import registerPhone from '@store/modules/registerPhone'
+import editPhone from '@store/modules/editPhone'
+import phonesList from '@store/modules/phonesList'
 
 const modules: any = {
-  registerPage,
-  phonesPage
+  registerPhone,
+  editPhone,
+  phonesList
 }
 
 export default createStore({

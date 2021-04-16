@@ -3,16 +3,16 @@
     <ul class="menu-main__btn-group">
       <li class="menu-main__btn-body">
         <router-link
-          to="/phones"
+          to="/phones-list"
           class="menu-main__btn-link"
         >
           <i class="fas fa-mobile-alt menu-main__btn-icon" />
-          <span class="menu-main__btn-text">Phones</span>
+          <span class="menu-main__btn-text">Phones list</span>
         </router-link>        
       </li>
       <li class="menu-main__btn-body">
         <router-link
-          to="/register"
+          to="/register-phone"
           class="menu-main__btn-link menu-main__btn-link--mr-0"
         >
           <i class="fas fa-file-alt menu-main__btn-icon" />

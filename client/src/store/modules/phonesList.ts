@@ -1,13 +1,13 @@
 import { ActionTree, MutationTree } from 'vuex'
-import { PhonesPageInterface } from '@interfaces/PhonesPage'
+import { PhonesListInterface } from '@interfaces/PhonesList'
 
 const SERVER_HOST = process.env.SERVER_HOST || ''
 
-const state: PhonesPageInterface = {
+const state: PhonesListInterface = {
   phones: []
 }
 
-const mutations: MutationTree<PhonesPageInterface> = {
+const mutations: MutationTree<PhonesListInterface> = {
   getAllPhones(state, { phones }) {
     state.phones = phones
   },
@@ -17,7 +17,7 @@ const mutations: MutationTree<PhonesPageInterface> = {
   }
 }
 
-const actions: ActionTree<PhonesPageInterface, PhonesPageInterface> = {
+const actions: ActionTree<PhonesListInterface, PhonesListInterface> = {
   async getAllPhones({ commit }) {
     try {
       const response = await fetch(SERVER_HOST, {

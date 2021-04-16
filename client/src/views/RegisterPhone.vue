@@ -1,11 +1,11 @@
 <template>
-  <section class="register-page">
+  <section class="register-phone">
     <h1
-      class="register-page__title"
+      class="register-phone__title"
     >
       Register a phone
     </h1>
-    <FormPhone />
+    <FormPhone module-name="registerPhone" />
   </section>
 </template>
 
@@ -14,7 +14,7 @@ import FormPhone from '@views/form-phone/FormPhone.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'RegisterPage',
+  name: 'RegisterPhone',
 
   components: {
     FormPhone
@@ -23,12 +23,12 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.register-page {
+.register-phone {
   width: 100%;
   max-width: 700px;
 }
 
-.register-page__title {
+.register-phone__title {
   color: #3a3a3a;
   font-size: 14pt;
   margin-top: 1.5em;
