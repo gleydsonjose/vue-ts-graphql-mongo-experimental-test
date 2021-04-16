@@ -5,7 +5,7 @@
     "year": 2020,
     "operationSystem": "Android 11 Samsung One Ui Core 3.0",
     "chipset": "Samsung Exynos 9611",
-    "randomAcessMemory": {
+    "randomAccessMemory": {
       "quantity": 6,
       "unit": "GB"
     },
@@ -62,7 +62,7 @@
     "year": 2019,
     "operationSystem": "Android 10 Samsung One Ui Core 2.0",
     "chipset": "Samsung Exynos 9611",
-    "randomAcessMemory": {
+    "randomAccessMemory": {
       "quantity": 4,
       "unit": "GB"
     },

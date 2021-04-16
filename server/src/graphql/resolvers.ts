@@ -46,9 +46,9 @@ export default {
       }
     },
 
-    deletePhone: async (_: any, args: MutationPhoneInterface) => {
+    removePhone: async (_: any, args: MutationPhoneInterface) => {
       const _id = new ObjectId(args._id)
-      const { deletedCount } = await phonesServices.deleteData({ _id })
+      const { deletedCount } = await phonesServices.removeData({ _id })
 
       if (deletedCount) return true
       else return false

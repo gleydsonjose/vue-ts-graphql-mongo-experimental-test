@@ -24,7 +24,7 @@ export default class {
     return this.dbCollection.updateOne(filter, update, options)
   }
 
-  deleteData (filter: object = {}, options: object = {}) {
+  removeData (filter: object = {}, options: object = {}) {
     return this.dbCollection.deleteOne(filter, options)
   }
 }

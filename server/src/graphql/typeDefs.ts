@@ -118,6 +118,6 @@ export default gql`
   type Mutation {
     addPhone (phone: PhoneInput!): Phone
     editPhone (_id: ID!, phone: PhoneInput!): Phone
-    deletePhone (_id: ID!): Boolean
+    removePhone (_id: ID!): Boolean
   }
 `
