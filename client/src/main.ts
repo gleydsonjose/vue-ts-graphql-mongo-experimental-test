@@ -1,15 +1,26 @@
-import { createApp } from 'vue'
-import { createRouter, createWebHashHistory } from 'vue-router'
+import Vue from 'vue'
+import Vuex from 'vuex'
+import VueRouter from 'vue-router'
 import App from '@views/App.vue'
 import routes from '@routes/mainRoutes'
-import store from '@store/index'
+import { modules } from '@store/index'
 
-const router = createRouter({
-  history: createWebHashHistory(),
+Vue.use(Vuex)
+Vue.use(VueRouter)
+
+const store = new Vuex.Store({
+  modules
+})
+
+const router = new VueRouter({
   routes
 })
 
-const app = createApp(App)
-app.use(router)
-app.use(store)
-app.mount('#root')
+const app = new Vue({
+  store,
+  router,
+  render: h => h(App)
+})
+
+// app.use(store)
+app.$mount('#root')

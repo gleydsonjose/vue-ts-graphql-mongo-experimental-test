@@ -11,9 +11,9 @@
 
 <script lang="ts">
 import FormPhone from '@views/form-phone/FormPhone.vue'
-import { defineComponent } from 'vue'
+import Vue from 'vue'
 
-export default defineComponent({
+export default Vue.extend({
   name: 'RegisterPhone',
 
   components: {

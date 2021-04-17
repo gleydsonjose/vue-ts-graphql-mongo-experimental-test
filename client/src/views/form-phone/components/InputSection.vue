@@ -14,11 +14,11 @@
       <section class="input-section__btn-aside">
         <input
           :id="idAttribute"
-          :value="modelValue"
+          :value="value"
           :type="inputType"
           :min="minAttribute"
           class="input-section__input"
-          @input="$emit('update:modelValue', $event.target.value)"
+          @input="$emit('input', $event.target.value)"
         >
         <button
           class="input-section__btn input-section__btn--remove"
@@ -35,8 +35,8 @@
         v-if="inputType === 'select'"
         :id="idAttribute"
         class="input-section__select"
-        :value="modelValue"
-        @change="$emit('update:modelValue', $event.target.value)"
+        :value="value"
+        @change="$emit('input', $event.target.value)"
       >
         <option value="">
           {{ selectDefaultLabelOption }}
@@ -55,9 +55,9 @@
         :id="idAttribute"
         :type="inputType"
         class="input-section__input"
-        :value="modelValue"
+        :value="value"
         :min="minAttribute"
-        @input="$emit('update:modelValue', $event.target.value)"
+        @input="$emit('input', $event.target.value)"
       >
       
       <input
@@ -65,17 +65,17 @@
         :id="idAttribute"
         :type="inputType"
         class="input-section__input"
-        :value="modelValue"
-        @input="$emit('update:modelValue', $event.target.value)"
+        :value="value"
+        @input="$emit('input', $event.target.value)"
       >
     </template>
   </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import Vue from 'vue'
 
-export default defineComponent({
+export default Vue.extend({
   name: 'InputSection',
 
   props: {
@@ -107,7 +107,7 @@ export default defineComponent({
       default: '0'
     },
 
-    modelValue: {
+    value: {
       type: [String, Number],
       required: true
     },
@@ -130,8 +130,6 @@ export default defineComponent({
       default: () => []
     }
   },
-
-  emits: ['update:modelValue', 'remove-camera'],
 
   computed: {
     inputSectionAdditionalClass() {

@@ -94,7 +94,7 @@
       </thead>
       <tbody class="phones-list__tbody">
         <tr
-          v-for="(phone, indexPhone) in $store.state.phonesList.phones"
+          v-for="(phone, indexPhone) in phones"
           :key="phone._id"
           class="phones-list__tr"
         >
@@ -149,7 +149,7 @@
               <button
                 class="phones-list__btn phones-list__btn--remove"
                 title="Remove"
-                @click="$store.dispatch('phonesList/removeOnePhone', { _id: phone._id, indexPhone })"
+                @click="removeOnePhone({ _id: phone._id, indexPhone })"
               >
                 <i class="fas fa-trash-alt phones-list__btn-icon" />
               </button>
@@ -162,14 +162,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import Vue from 'vue'
 import { PositionCameraInterface } from '@interfaces/Phone'
+import { mapState, mapActions } from 'vuex'
 
-export default defineComponent({
+export default Vue.extend({
   name: 'PhonesList',
 
   mounted() {
-    this.$store.dispatch('phonesList/getAllPhones')
+    this.getAllPhones()
+  },
+
+  computed: {
+    ...mapState('phonesList', ['phones'])
   },
 
   methods: {
@@ -179,7 +184,9 @@ export default defineComponent({
 
     buildStringWithCameras(cameras: PositionCameraInterface[], cameraUnit: string) {
       return cameras.map(({pixel}) => `${pixel + cameraUnit}`).join(', ')
-    }
+    },
+
+    ...mapActions('phonesList', ['getAllPhones', 'removeOnePhone'])
   }
 })
 </script>

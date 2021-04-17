@@ -1,10 +1,10 @@
-import PhonesList from '@views/PhonesList.vue'
-import RegisterPhone from '@views/RegisterPhone.vue'
-import EditPhone from '@views/EditPhone.vue'
+const PhonesList = () => import('@views/PhonesList.vue')
+const RegisterPhone = () => import('@views/RegisterPhone.vue')
+const EditPhone = () => import('@views/EditPhone.vue')
 
 export default [
   {
-    path: '/:catchAll(.*)',
+    path: '*',
     name: 'NotFound',
     redirect: '/phones-list'
   },

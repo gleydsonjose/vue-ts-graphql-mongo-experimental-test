@@ -11,9 +11,10 @@
 
 <script lang="ts">
 import FormPhone from '@views/form-phone/FormPhone.vue'
-import { defineComponent } from 'vue'
+import Vue from 'vue'
+import { mapActions } from 'vuex'
 
-export default defineComponent({
+export default Vue.extend({
   name: 'EditPhone',
 
   components: {
@@ -22,7 +23,11 @@ export default defineComponent({
 
   created() {
     const { _id } = this.$route.params
-    this.$store.dispatch('editPhone/getOnePhone', { _id })
+    this.getOnePhone({ _id })
+  },
+
+  methods: {
+    ...mapActions('editPhone', ['getOnePhone'])
   }
 })
 </script>
