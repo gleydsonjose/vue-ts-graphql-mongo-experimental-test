@@ -149,7 +149,7 @@
               <button
                 class="phones-list__btn phones-list__btn--remove"
                 title="Remove"
-                @click="removeOnePhone({ _id: phone._id, indexPhone })"
+                @click="removeOnePhone(phone._id, indexPhone)"
               >
                 <i class="fas fa-trash-alt phones-list__btn-icon" />
               </button>
@@ -164,17 +164,21 @@
 <script lang="ts">
 import Vue from 'vue'
 import { PositionCameraInterface } from '@interfaces/Phone'
-import { mapState, mapActions } from 'vuex'
+import { fetchAllPhonesQuery, removeOnePhoneLocalMutation } from '@graphql/queries'
 
 export default Vue.extend({
   name: 'PhonesList',
 
-  mounted() {
-    this.getAllPhones()
+  apollo: {
+    phones: {
+      query: fetchAllPhonesQuery
+    }
   },
 
-  computed: {
-    ...mapState('phonesList', ['phones'])
+  data() {
+    return {
+      phones: []
+    }
   },
 
   methods: {
@@ -186,7 +190,12 @@ export default Vue.extend({
       return cameras.map(({pixel}) => `${pixel + cameraUnit}`).join(', ')
     },
 
-    ...mapActions('phonesList', ['getAllPhones', 'removeOnePhone'])
+    removeOnePhone(_id: string, indexPhone: string) {
+      this.$apollo.mutate({
+        mutation: removeOnePhoneLocalMutation,
+        variables: { _id, indexPhone }
+      })
+    }
   }
 })
 </script>
