@@ -171,7 +171,7 @@ export default Vue.extend({
 
   apollo: {
     phones: {
-      query: fetchAllPhonesQuery
+      query:  fetchAllPhonesQuery
     }
   },
 

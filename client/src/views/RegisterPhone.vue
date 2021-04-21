@@ -5,7 +5,9 @@
     >
       Register a phone
     </h1>
-    <FormPhone module-name="registerPhone" />
+    <FormPhone
+      form-type="REGISTER"
+    />
   </section>
 </template>
 

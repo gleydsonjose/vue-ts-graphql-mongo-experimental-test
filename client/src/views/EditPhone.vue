@@ -5,30 +5,41 @@
     >
       Edit a phone
     </h1>
-    <FormPhone module-name="editPhone" />
+    <FormPhone
+      form-type="EDIT"
+      :phone="phone"
+    />
   </section>
 </template>
 
 <script lang="ts">
 import FormPhone from '@views/form-phone/FormPhone.vue'
 import Vue from 'vue'
-import { mapActions } from 'vuex'
+import { fetchOnePhoneQuery } from '@graphql/queries'
 
 export default Vue.extend({
   name: 'EditPhone',
+
+  apollo: {
+    phone: {
+      query: fetchOnePhoneQuery,
+      variables() {
+        return {
+          _id: this.$route.params._id
+        }
+      }
+    }
+  },
 
   components: {
     FormPhone
   },
 
-  created() {
-    const { _id } = this.$route.params
-    this.getOnePhone({ _id })
+  data() {
+    return {
+      phone: {}
+    }
   },
-
-  methods: {
-    ...mapActions('editPhone', ['getOnePhone'])
-  }
 })
 </script>
 

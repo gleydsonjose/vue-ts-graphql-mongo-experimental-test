@@ -144,14 +144,14 @@
         input-type="number"
         :label-text="`${indexBackCamera + 1}° Back Camera Pixel Quantity`"
         input-section-type="btn-aside"
-        @remove-camera="removeCamera({cameraPosition: 'back', indexCamera: indexBackCamera})"
+        @remove-camera="removeCamera('back', indexBackCamera)"
       />
 
       <ButtonSection
         button-section-type="add"
         label-text="Add Back Camera"
         icon-class="fas fa-plus"
-        @click-button-section="addCamera({cameraPosition: 'back'})"
+        @click-button-section="addCamera('back')"
       />
 
       <InputSection
@@ -162,14 +162,14 @@
         input-type="number"
         :label-text="`${indexFrontCamera + 1}° Front Camera Pixel Quantity`"
         input-section-type="btn-aside"
-        @remove-camera="removeCamera({cameraPosition: 'front', indexCamera: indexFrontCamera})"
+        @remove-camera="removeCamera('front', indexFrontCamera)"
       />
 
       <ButtonSection
         button-section-type="add"
         label-text="Add Front Camera"
         icon-class="fas fa-plus"
-        @click-button-section="addCamera({cameraPosition: 'front'})"
+        @click-button-section="addCamera('front')"
       />
 
       <InputSection
@@ -217,9 +217,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { mapState, mapMutations, mapActions } from 'vuex'
 import InputSection from '@views/form-phone/components/InputSection.vue'
 import ButtonSection from '@views/form-phone/components/ButtonSection.vue'
+import { fetchAllUnitsQuery, savePhoneDataLocalMutation } from '@graphql/queries'
+import { FormPhoneInterface } from '@interfaces/FormPhone'
 
 export default Vue.extend({
   name: 'FormPhone',
@@ -230,49 +231,113 @@ export default Vue.extend({
   },
 
   props: {
-    moduleName:  {
+    formType:  {
       type: String,
+      required: true
+    },
+
+    phone: {
+      type: Object,
       required: false,
-      default: ''
+      default: () => ({})
     }
   },
 
-  computed: {
-    ...mapState({
-      form (state: any) {
-        return state[this.moduleName].form
-      },
-
-      units (state: any) {
-        return state[this.moduleName].units
-      }
-    })
+  apollo: {
+    units: {
+      query: fetchAllUnitsQuery
+    }
   },
 
-  methods: {
-    ...mapMutations({
-      addCamera (commit, payload) {
-        return commit(`${this.moduleName}/addCamera`, payload)
+  data(): FormPhoneInterface {
+    return {
+      form: {
+        manufacturer: '',
+        model: '',
+        year: 0,
+        operationSystem: '',
+        chipset: '',
+        randomAccessMemory: {
+          quantity: 0,
+          unit: ''
+        },
+        internalMemory: {
+          quantity: 0,
+          unit: ''
+        },
+        screen: {
+          type: '',
+          resolution: {
+            width: 0,
+            height: 0,
+            unit: ''
+          },
+          protection: ''
+        },
+        camera: {
+          unit: '',
+          positions: {
+            back: [],
+            front: []
+          }
+        },
+        battery: {
+          quantity: 0,
+          unit: ''
+        },
       },
 
-      removeCamera (commit, payload) {
-        return commit(`${this.moduleName}/removeCamera`, payload)
+      units: {
+        dataStorage: [],
+        battery: [],
+        resolution: []
       }
-    }),
-
-    ...mapActions({
-      getAllUnits (dispatch) {
-        return dispatch(`${this.moduleName}/getAllUnits`)
-      },
-
-      saveData (dispatch) {
-        return dispatch(`${this.moduleName}/saveData`)
-      }
-    })
+    }
   },
 
   mounted() {
-    this.getAllUnits()
+    if (this.phone._id) {
+      const phoneMap = new Map(Object.entries(this.phone))
+      phoneMap.delete('_id')
+      const newForm: any = Object.fromEntries(phoneMap)
+      this.form = newForm
+    }
+  },
+
+  methods: {
+    addCamera(cameraPosition: string) {
+      const allCameras = this.form.camera.positions[cameraPosition]
+      let newCameraId = 1
+
+      if (allCameras.length) {
+        const allCamerasLastIndex = allCameras.length-1
+        newCameraId = allCameras[allCamerasLastIndex].id + 1
+      }
+      
+      const newCamera = { id: newCameraId, pixel: 0 }
+
+      allCameras.push(newCamera)
+    },
+
+    removeCamera(cameraPosition: string, indexCamera: number) {
+      this.form.camera.positions[cameraPosition].splice(indexCamera, 1)
+    },
+
+    saveData() {
+      let variables: any = {
+        formType: this.formType,
+        formData: this.form
+      }
+
+      if (this.phone._id) {
+        variables = {...variables, phoneId: this.phone._id}
+      }
+
+      this.$apollo.mutate({
+        mutation: savePhoneDataLocalMutation,
+        variables
+      })
+    }
   },
 })
 </script>
