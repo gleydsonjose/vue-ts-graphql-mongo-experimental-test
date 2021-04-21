@@ -7,6 +7,23 @@ const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin')
 const DotEnv = require('dotenv-webpack')
 
 const ENVIRONMENT = process.env.NODE_ENV
+const plugins = [
+  new HtmlWebpackPlugin({
+    hash: true,
+    template: './template.html',
+    title: 'Studies Enviroment'
+  }),
+  new VueLoaderPlugin(),
+  new ESLintPlugin({
+    extensions: ['js', 'ts', 'vue'],
+    emitWarning: false
+  }),
+  new DotEnv()
+]
+
+if (ENVIRONMENT === 'production') {
+  plugins.push(new CleanWebpackPlugin())
+}
 
 module.exports = {
   mode: ENVIRONMENT,
@@ -17,19 +34,7 @@ module.exports = {
     filename: '[name].js',
     chunkFilename: '[id].chunk.js'
   },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      hash: true,
-      template: './template.html',
-      title: 'Studies Enviroment'
-    }),
-    new VueLoaderPlugin(),
-    new ESLintPlugin({
-      extensions: ['js', 'ts', 'vue']
-    }),
-    new DotEnv()
-  ],
+  plugins,
   module: {
     rules: [
       {
